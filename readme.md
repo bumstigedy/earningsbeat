@@ -1,3 +1,6 @@
+view the web page
+https://bumstigedy.github.io/earningsbeat/
+
 This repo contains a personal project which tries to predict if a stock will beat the earnings estimated based on various features.  
 
 
