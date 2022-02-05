@@ -1,0 +1,4 @@
+https://www.alphavantage.co/documentation/#earnings
+this site has a free API that that can be used to extract
+historical earnings, fundamental data, and prices
+
