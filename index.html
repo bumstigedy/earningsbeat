@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicting earnings beats</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Predicting earnings beats</h1>
+    <br>
+    <h2>by Sanjay Shah</h2>
+    <br>
+    <h2>The goal</h2>
+    <p>When I first began holding individual stocks, I learned that prices can be quite volatile around earnings. This
+        may be due to a beat, miss,
+        or guidance given during the earnings call. I thought it would be interesting to try and predict if a stock will
+        beat or miss the earnings estimate. The goal of this personal project is to predict the probability that a stock
+        will beat
+        its earnings estimate.
+        We won't make any prediction about how the price will react; that can be the goal of another project.
+
+    </p>
+    <br>
+    <h2>Features</h2>
+    <ol>
+        <li>Percent change in stock price over the last 10 days. The theory is that smart investors, who know that an
+            earnings beat is likely, may
+            bid up the price ahead of the earnings release.
+        </li>
+        <li>Trend status. The basis for this feature is similar to the one above, but takes a longer term view. The RSI
+            was used to determine the status of the trend.
+            <ol>
+                <li>Oversold in a bullish trend. Current RSI 50 or below and RSI hasn't recently gone below 40</li>
+                <li>Overbought in a bullish trend. Current RSI 80 or above and RSI hasn't recently gone below 40</li>
+                <li>Oversold in a bearish trend. Current RSI 20 or below and RSI has recently gone below 40</li>
+                <li>Overbought in a bearish trend. Current RSI 50 or above and RSI has recently gone below 40</li>
+                <li>Neutral when none of the above apply</li>
+            </ol>
+        </li>
+        <li>Earnings suprise history. The theory is that if they have recently been beating earnings, they are likely to
+            continue. </li>
+    </ol>
+    <h2> The model</h2>
+    <p> A tensorflow deep neural network was used to create a binary classification model. </p>
+    <h2>The data</h2>
+    <p>Free data on the stocks currently in the S&P500. </p>
+    <h2>Results</h2>
+    <p>
+        The model's accuracy was around 70%. This sounds ok, but given that the stocks beat earnings most of the time it
+        is not much better than
+        just always predicting a beat. The results varied by stock, and the model worked beter for some stocks. Let's
+        look at a few examples.
+    <div>
+        <h4>United Airlines</h4>
+        <div>
+            <p> If we use a threshold of 60% to 70% for an earnings beat, the model does an ok job. The chart shows
+                price in the top panel, RSI in
+                the middle panel, and the beat probability and actual beat or miss on the bottom. You can click on the
+                link below for an interactive
+                full screen chart which is easier to read.
+            </p>
+        </div>
+
+    </div>
+    <div>
+        <img src="UAL.png" alt="UAL chart" width="1000" height="500">
+
+    </div>
+    <a href="spy/charts/UAL.html">click for interactive chart</a>
+    <br>
+    <div>
+        <h4>JP Morgan</h4>
+        <div>
+            <p> We see similar results here. A threshold of 60% to 70% seems ok, but does not work all the time!
+            </p>
+        </div>
+
+    </div>
+    <div>
+        <img src="JPM.png" alt="JPM chart" width="1000" height="500">
+
+    </div>
+    <a href="spy/charts/JPM.html">click for interactive chart</a>
+
+
+
+    </p>
+    <h2> So what</h2>
+    <p> This was a fun project which allowed me to practice machine learning with tensorflow.
+        The model is not good enough to use for any investment decisions. It could potentially be improved by trying out
+        different features.
+        One idea is to use impled volatility from the options market, but that data costs money so I won't be trying
+        that
+        any time soon.
+        Below are links to all the test results in case you would like to look through them. Please note that I used
+        unadjusted prices
+        since they were free. This resutls in some funny looking price spy/charts around splits. This should not have
+        much
+        of an impact on the
+        model since it only uses about 90 days of price history at time.
+    </p>
+    <br>
+    <div></div>
+    <a href="spy/charts/ADI.html">ADI</a>
+    <a href="spy/charts/AEE.html">AEE</a>
+    <a href="spy/charts/AES.html">AES</a>
+    <a href="spy/charts/APH.html">APH</a>
+    <a href="spy/charts/BAX.html">BAX</a>
+    <a href="spy/charts/BEN.html">BEN</a>
+    <a href="spy/charts/CAH.html">CAH</a>
+    <a href="spy/charts/CCI.html">CCI</a>
+    <a href="spy/charts/CDAY.html">CDAY</a>
+    <a href="spy/charts/CERN.html">CERN</a>
+    <a href="spy/charts/CF.html">CF</a>
+    <a href="spy/charts/CMS.html">CMS</a>
+    <a href="spy/charts/COF.html">COF</a>
+    <a href="spy/charts/CXS.html">CXS</a>
+    <a href="spy/charts/CTXS.html">CTXS</a>
+    <a href="spy/charts/CVS.html">CVS</a>
+    <a href="spy/charts/CVX.html">CVX</a>
+    <a href="spy/charts/DLR.html">DLR</a>
+    <a href="spy/charts/DLTR.html">DLTR</a>
+    <a href="spy/charts/DOV.html">DOV</a>
+    <a href="spy/charts/DRI.html">DRI</a>
+    <a href="spy/charts/DXCM.html">DXCM</a>
+    <a href="spy/charts/EL.html">EL</a>
+    <a href="spy/charts/ENPH.html">ENPH</a>
+    <a href="spy/charts/ETR.html">ETR</a>
+    <a href="spy/charts/EXPD.html">EXPD</a>
+    <a href="spy/charts/FBHS.html">FBHS</a>
+    <a href="spy/charts/FDX.html">FDX</a>
+    <a href="spy/charts/FISV.html">FISV</a>
+    <a href="spy/charts/FLT.html">FLT</a>
+    <a href="spy/charts/GIS.html">GIS</a>
+    <a href="spy/charts/GM.html">GM</a>
+    <a href="spy/charts/GOOGL.html">GOOGL</a>
+    <a href="spy/charts/GRMN.html">GRMN</a>
+    <a href="spy/charts/GWW.html">GWW</a>
+    <a href="spy/charts/HBI.html">HBI</a>
+    <a href="spy/charts/HST.html">HST</a>
+    <a href="spy/charts/HWM.html">HWM</a>
+    <a href="spy/charts/IDXX.html">IDXX</a>
+    <a href="spy/charts/INTC.html">INTC</a>
+    <a href="spy/charts/IPGP.html">IPGP</a>
+    <a href="spy/charts/JNJ.html">JNJ</a>
+    <a href="spy/charts/JPM.html">JPM</a>
+    <a href="spy/charts/KEY.html">KEY</a>
+    <a href="spy/charts/KLAC.html">KLAC</a>
+    <a href="spy/charts/L.html">L</a>
+    <a href="spy/charts/LDOS.html">LDOS</a>
+    <a href="spy/charts/LMT.html">LMT</a>
+    <a href="spy/charts/LNC.html">LNC</a>
+    <a href="spy/charts/MCHP.html">MCHP</a>
+    <a href="spy/charts/MGM.html">MGM</a>
+    <a href="spy/charts/MHK.html">MHK</a>
+    <a href="spy/charts/MSFT.html">MSFT</a>
+    <a href="spy/charts/NDAQ.html">NDAQ</a>
+    <a href="spy/charts/NOW.html">NOW</a>
+    <a href="spy/charts/NVDA.html">NVDA</a>
+    <a href="spy/charts/O.html">O</a>
+    <a href="spy/charts/ODFL.html">ODFL</a>
+    <a href="spy/charts/PBCT.html">PBCT</a>
+    <a href="spy/charts/PEG.html">PEG</a>
+    <a href="spy/charts/PENN.html">PENN</a>
+    <a href="spy/charts/PG.html">PG</a>
+    <a href="spy/charts/PH.html">PH</a>
+    <a href="spy/charts/PLD.html">PLD</a>
+    <a href="spy/charts/PSA.html">PSA</a>
+    <a href="spy/charts/PSX.html">PSX</a>
+    <a href="spy/charts/PTC.html">PTC</a>
+    <a href="spy/charts/PYPL.html">PYPL</a>
+    <a href="spy/charts/QCOM.html">QCOM</a>
+    <a href="spy/charts/QRVO.html">QRVO</a>
+    <a href="spy/charts/RE.html">RE</a>
+    <a href="spy/charts/RMD.html">RMD</a>
+    <a href="spy/charts/ROK.html">ROK</a>
+    <a href="spy/charts/SHW.html">SHW</a>
+    <a href="spy/charts/SJM.html">SJM</a>
+    <a href="spy/charts/SYF.html">SYF</a>
+    <a href="spy/charts/T.html">T</a>
+    <a href="spy/charts/TJX.html">TJX</a>
+    <a href="spy/charts/TT.html">TT</a>
+    <a href="spy/charts/TTWO.html">TTWO</a>
+    <a href="spy/charts/TXT.html">TXT</a>
+    <a href="spy/charts/TYL.html">TYL</a>
+    <a href="spy/charts/UAA.html">UAA</a>
+    <a href="spy/charts/ULTA.html">ULTA</a>
+    <a href="spy/charts/UNH.html">UNH</a>
+    <a href="spy/charts/VFC.html">VFQ</a>
+    <a href="spy/charts/VNO.html">VNO</a>
+    <a href="spy/charts/WHR.html">WHR</a>
+    <a href="spy/charts/WRK.html">WRK</a>
+    <a href="spy/charts/WU.html">WU</a>
+    <a href="spy/charts/ZBRA.html">ZBRA</a>
+
+
+</body>
+
+</html>
